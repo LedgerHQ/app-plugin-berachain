@@ -32,7 +32,7 @@ with open(
     )
 
 
-def test_create_reward_vault(backend, firmware, navigator, test_name, wallet_addr):
+def test_create_reward_vault(backend, navigator, test_name, wallet_addr):
     client = EthAppClient(backend)
 
     data = contract.encode_abi(
@@ -60,7 +60,7 @@ def test_create_reward_vault(backend, firmware, navigator, test_name, wallet_add
     # send the transaction
     with client.sign(DERIVATION_PATH, tx_params):
         # Validate the on-screen request by performing the navigation appropriate for this device
-        if firmware.is_nano:
+        if backend.device.is_nano:
             navigator.navigate_until_text_and_compare(
                 NavInsID.RIGHT_CLICK,
                 [NavInsID.BOTH_CLICK],

@@ -32,7 +32,7 @@ with open(
     )
 
 
-def test_drop_boost(backend, firmware, navigator, test_name, wallet_addr):
+def test_drop_boost(backend, navigator, test_name, wallet_addr):
     client = EthAppClient(backend)
     user_address = "8F5Db7DE1148dE9b762c8ddB9FB30B31D76843f3"
     public_key = "97266c94c490662479a9188b070c86e505df4f167016883af4114c8c1a71429e8f270c0c2f1b74375880f81828b768c0"
@@ -65,7 +65,7 @@ def test_drop_boost(backend, firmware, navigator, test_name, wallet_addr):
     # send the transaction
     with client.sign(DERIVATION_PATH, tx_params):
         # Validate the on-screen request by performing the navigation appropriate for this device
-        if firmware.is_nano:
+        if backend.device.is_nano:
             navigator.navigate_until_text_and_compare(
                 NavInsID.RIGHT_CLICK,
                 [NavInsID.BOTH_CLICK],
