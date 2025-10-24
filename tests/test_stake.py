@@ -32,7 +32,7 @@ with open(
     )
 
 
-def test_stake(backend, firmware, navigator, test_name, wallet_addr):
+def test_stake(backend, navigator, test_name, wallet_addr):
     client = EthAppClient(backend)
     amount = Web3.to_wei(1.5, "ether")
     data = contract.encode_abi(
@@ -63,7 +63,7 @@ def test_stake(backend, firmware, navigator, test_name, wallet_addr):
     # send the transaction
     with client.sign(DERIVATION_PATH, tx_params):
         # Validate the on-screen request by performing the navigation appropriate for this device
-        if firmware.is_nano:
+        if backend.device.is_nano:
             navigator.navigate_until_text_and_compare(
                 NavInsID.RIGHT_CLICK,
                 [NavInsID.BOTH_CLICK],
